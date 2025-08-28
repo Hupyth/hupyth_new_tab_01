@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<script src="../static/detect-devtools.js"></script>
+<script type='text/javascript'>
+    // Bypass for developers
+    const keyName = 'key';
+    const keyValue = '9ac7ec230e0e4513578f309d6d3579ad';
+
+    // Handle via config
+    DisableDevtool({
+        tkName: keyName,
+        md5: keyValue,
+        interval: '100',
+    });
+</script>
+<section class="card">
+  <h1>500 - System Error</h1>
+  <p>Page has broken. Please try again later.</p>
+</section>
+{% endblock %}

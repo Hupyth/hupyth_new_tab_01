@@ -1,0 +1,124 @@
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; transition: all 0.3s ease; }
+body { font-family: Arial, sans-serif; background: linear-gradient(135deg, #ffcc00, #ff6600); display: flex; flex-direction: column; align-items: center; padding: 80px 10px 20px; min-height: 100vh; justify-content: center; }
+
+@keyframes border-rotate {
+    0%, 100% { box-shadow: 0 0 0 1px black, 0 0 0 2px rgba(0, 0, 0, 0.75), 0 0 0 3px rgba(0, 0, 0, 0.5), 0 0 0 4px rgba(0, 0, 0, 0.25); }
+    25% { box-shadow: 0 0 0 1px red, 0 0 0 2px rgba(255, 0, 0, 0.75), 0 0 0 3px rgba(255, 0, 0, 0.5); }
+    50% { box-shadow: 0 0 0 1px green, 0 0 0 2px rgba(0, 255, 0, 0.75), 0 0 0 3px rgba(0, 255, 0, 0.5); }
+    75% { box-shadow: 0 0 0 1px blue, 0 0 0 2px rgba(0, 0, 255, 0.75), 0 0 0 3px rgba(0, 0, 255, 0.5); }
+}
+
+.time-container { text-align: center; margin-bottom: 30px; color: white; }
+#time { font-size: 5rem; font-weight: 300; }
+#date { font-size: 1.5rem; margin-bottom: 10px; }
+#greeting { font-size: 2rem; }
+.search-container { position: relative; width: 100%; max-width: 500px; height: 50px; margin: 20px auto; display: flex; }
+#search-box { width: calc(100% - 100px); height: 100%; padding: 0 15px; font-size: 16px; border: none; border-radius: 12px 0 0 12px; outline: none; color: #FFFFFF; background: rgba(255,255,255,0.1); box-shadow: 0 0 0 1px #000000, 0 0 0 2px rgba(0, 0, 0, 0.75); transition: all 0.3s ease; }
+#search-box:hover, #search-box:focus { background: white; color: black; animation: border-rotate 4s linear infinite; }
+#search-box::placeholder { color: #FFFFFF; }
+#search-box:hover::placeholder { color: #000000; }
+
+/* Search Suggestions Styles */
+.search-suggestions { position: absolute; top: 100%; left: 0; width: calc(100% - 100px); max-height: 200px; font-size: 16px; overflow-y: auto; border: none; background: rgba(0, 0, 0, 0.9); border-radius: 12px 0 12px 12px; z-index: 1000; outline: none; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); }
+.search-suggestions ul { list-style: none; padding: 0; margin: 0; }
+.search-suggestions li { padding: 10px 15px; cursor: pointer; color: white; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+.search-suggestions li:hover { background: rgba(255, 165, 0, 0.3); }
+.search-suggestions li:last-child { border-bottom: none; }
+
+/* Adjust search container for suggestions */
+.search-container { position: relative; width: 100%; max-width: 600px; }
+
+/* Mobile responsiveness for suggestions */
+@media (max-width: 600px) {
+    .search-suggestions { width: 100%; }
+}
+
+.search-buttons { display: flex; width: 100px; height: 100%; }
+.search-buttons button { flex: 1; border: none; cursor: pointer; background: rgba(255,255,255,0.1); box-shadow: 0 0 0 1px #000000, 0 0 0 2px rgba(0, 0, 0, 0.75); transition: all 0.3s ease; }
+.search-buttons button:hover { background: white; animation: border-rotate 4s linear infinite; }
+.search-buttons button:hover svg { fill: #000000; }
+.search-buttons button:first-child { border-right: 1px solid rgba(0,0,0,0.2); }
+.translate-container { display: none; max-width: 400px; margin: 10px auto; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 12px; box-shadow: 0 0 0 1px #000000, 0 0 0 2px rgba(0, 0, 0, 0.75); }
+#translate-result { width: 100%; height: 100px; background: transparent; border: none; color: white; resize: none; font-size: 16px; outline: none; }
+#swap-lang-btn { margin-top: 10px; padding: 8px 15px; border: none; border-radius: 8px; cursor: pointer; background: rgba(255,255,255,0.1); color: white; }
+.todo-container { max-width: 400px; margin: 20px auto; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 12px; color: white; }
+.todo-list { margin-top: 10px; max-height: 200px; overflow-y: auto; }
+.todo-item { display: flex; align-items: center; padding: 8px; margin-bottom: 5px; background: rgba(255,255,255,0.2); border-radius: 6px; }
+.todo-item input[type="checkbox"] { margin-right: 10px; }
+.todo-item.completed { text-decoration: line-through; opacity: 0.7; }
+.todo-time { font-weight: bold; margin-right: 8px; min-width: 60px; }
+.add-todo { margin-top: 10px; padding: 8px 15px; border: none; border-radius: 8px; cursor: pointer; background: rgba(255,255,255,0.2); color: white; }
+.alarm-settings { margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px; }
+.alarm-settings select, .alarm-settings input { background: rgba(255,255,255,0.2); border: none; border-radius: 4px; padding: 5px; color: white; margin-right: 10px; margin-bottom: 10px; }
+.alarm-settings button { padding: 5px 10px; border: none; border-radius: 4px; cursor: pointer; background: rgba(255,255,255,0.2); color: white; }
+.alarm-active { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.9); color: white; padding: 20px; border-radius: 10px; z-index: 1000; text-align: center; box-shadow: 0 0 20px rgba(255,0,0,0.5); }
+.alarm-active h3 { margin-bottom: 15px; color: #ff6600; }
+.alarm-active button { padding: 10px 20px; background: #ff6600; border: none; border-radius: 5px; color: white; cursor: pointer; font-weight: bold; }
+.bookmarks-container { max-width: 400px; margin: 20px auto; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 12px; }
+.bookmarks-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; margin-top: 10px; }
+.bookmark-item { background: rgba(255,255,255,0.2); padding: 10px; border-radius: 8px; text-align: center; transition: all 0.3s ease; position: relative; }
+.add-bookmark { width: 20px; min-width: 1px; height: 20px; border: 0.1px solid black; border-radius: 8px; cursor: pointer; background: transparent; box-shadow: 0 0 0 1px #000000, 0 0 0 2px rgba(0, 0, 0, 0.75); }
+.delete-bookmark { position: absolute; top: -5px; right: -5px; width: 20px; height: 20px; border-radius: 50%; background: red; color: white; border: none; cursor: pointer; font-weight: bold; display: none; }
+.bookmark-item:hover { transform: translateY(-3px); background: rgba(255,255,255,0.3); }
+.bookmark-item:hover .delete-bookmark { display: block; }
+
+@media (max-width: 600px) {
+    .search-container { flex-direction: column; height: auto; }
+    #search-box { width: 100%; border-radius: 12px; margin-bottom: 10px; }
+    .search-buttons { width: 100%; }
+    .search-buttons button { border-radius: 12px; margin-bottom: 5px; }
+    .search-buttons button:first-child { border-right: none; border-bottom: 1px solid rgba(0,0,0,0.2); }
+}
+
+/* Navigation Styles */
+.main-nav { position: fixed; top: 0; left: 0; width: 100%; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(10px); z-index: 1000; padding: 10px 0; }
+.nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
+.nav-logo { color: white; font-size: 1.5rem; font-weight: bold; text-decoration: none; }
+.nav-menu { display: flex; gap: 20px; }
+.nav-link { color: white; text-decoration: none; padding: 8px 16px; border-radius: 4px; transition: background 0.3s; }
+.nav-link:hover, .nav-link.active { background: rgba(255, 165, 0, 0.7); }
+
+/* Content Container */
+.content-container { width: 100%; max-width: 1000px; margin: 80px auto 20px; padding: 20px; }
+.page-content { background: rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 30px; color: white; box-shadow: 0 0 0 1px #000000, 0 0 0 2px rgba(0, 0, 0, 0.75); }
+.page-content h1 { font-size: 2.5rem; margin-bottom: 20px; text-align: center; }
+.page-content h2 { font-size: 1.8rem; margin: 25px 0 15px; color: #ffcc00; }
+.page-content h3 { font-size: 1.4rem; margin: 20px 0 10px; color: #ffcc00; }
+.page-content p { line-height: 1.6; margin-bottom: 15px; }
+.page-content ul { margin-left: 20px; margin-bottom: 20px; }
+.page-content li { margin-bottom: 8px; }
+
+/* About Page Specific Styles */
+.about-section { max-width: 800px; margin: 0 auto; }
+.version-info { margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.2); }
+.version-info p { margin-bottom: 5px; font-style: italic; }
+
+/* Contact Page Specific Styles */
+.contact-methods { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 30px 0; }
+.contact-card { background: rgba(255, 255, 255, 0.1); padding: 20px; border-radius: 8px; text-align: center; }
+.contact-card a { color: #ffcc00; text-decoration: none; font-weight: bold; }
+.contact-card a:hover { text-decoration: underline; }
+.faq-section { margin-top: 40px; }
+.faq-item { margin-bottom: 25px; padding-bottom: 25px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+.faq-item:last-child { border-bottom: none; }
+
+/* Responsive Design for Navigation */
+@media (max-width: 768px) {
+    .nav-container { flex-direction: column; gap: 10px; }
+    .nav-menu { width: 100%; justify-content: center; }
+    .content-container { margin-top: 120px; }
+}
+@media (max-width: 480px) {
+    .nav-menu { flex-direction: column; align-items: center; gap: 10px; }
+    .page-content { padding: 20px 15px; }
+    .contact-methods { grid-template-columns: 1fr; }
+}
+
+/* --- Enhancements for multi-page UX --- */
+.card{ background: rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.25); border-radius:16px; padding:24px; backdrop-filter: blur(6px); color: #fff; }
+.form-row{ display:grid; gap:6px; margin-bottom:12px; }
+.form-row input, .form-row textarea{ padding:10px; border-radius:10px; border:1px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.08); color: #fff; }
+.form-actions{ display:flex; gap:8px; align-items:center; }
+button.secondary{ background: transparent; border:1px solid rgba(255,255,255,0.25); }
+.status{ margin-top:8px; }
+footer{ color:#fff; }

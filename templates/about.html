@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<script src="../static/detect-devtools.js"></script>
+<script type='text/javascript'>
+    // Bypass for developers
+    const keyName = 'key';
+    const keyValue = '9ac7ec230e0e4513578f309d6d3579ad';
+
+    // Handle via config
+    DisableDevtool({
+        tkName: keyName,
+        md5: keyValue,
+        interval: '100',
+    });
+</script>
+<section class="card">
+  <h1>Introduction</h1>
+  <h4>Developed and Tested by Hupyth.</h4>
+  <p>Website Introduction:</p>
+  <ul>
+    <li>Website simulate advanced New Tab: Search, Translate, Alarm Clock + Note, Bookmark, Widget, ...</li>
+    <li>UI (CSP, fonts, background, style).</li>
+    <li>Alias URL.</li>
+  </ul>
+</section>
+{% endblock %}
