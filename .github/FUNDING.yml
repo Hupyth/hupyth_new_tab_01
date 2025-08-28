@@ -1,5 +1,5 @@
 # These are supported funding model platforms
-github: Hupyth   # nếu bạn bật GitHub Sponsors
-patreon: yourPatreonID
-ko_fi: yourKoFiID
-custom: ["https://www.paypal.me/yourPayPalLink", "https://buymeacoffee.com/yourID"]
+github: "Hupyth"   # If GitHub Sponsors is turned on
+patreon: "https://www.patreon.com/c/Hupyth"
+ko_fi: "https://ko-fi.com/hupyth"
+custom: ["https://www.paypal.me/yourPayPalLink", "https://buymeacoffee.com/giahuy0506h"]
